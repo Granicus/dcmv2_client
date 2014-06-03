@@ -30,7 +30,7 @@ DCMV2_ACCOUNT_ID = 1234
 Running standalone
 ------------------
 Once the API key and account ID have been setup, an IRB console with the gem
-loaded can be accessed by running:
+loaded can be accessed by running from the root directory of the gem:
 
 ```
 $ rake console
@@ -38,7 +38,7 @@ $ rake console
 
 Configuring within a project
 ----------------------------
-Within a project, e.g. in another Rails app, the environment variables can be
+Within a project, e.g. in a Rails app, the environment variables can be
 bypassed and the API key and Account ID can be assigned directly to the DCMv2
 module. It is recommended these values be added in a initializers file.
 
@@ -60,7 +60,7 @@ With the client, a user can determine what resources are immediately available
 by calling
 
 ```ruby
-client.available_resources #=> ['reports', 'self']
+client.available_resources # => ['reports', 'self']
 ```
 
 To follow one of the listed resources, e.g. 'reports', call
@@ -122,11 +122,11 @@ by calling `client.embedded_data`
 
 Each resource can contain its own set of data or embedded resources. To
 follow an _embedded_ resource, rather than a normal resource, find its name by
-calling `client.available_embedded_resources`. Just like Client#available_resources
+calling `client.available_embedded_resources`. Just like `Client#available_resources`
 this will return a list of embedded resource paths.
 
 ```ruby
-client.available_embedded_resources #=> ['subscribers/0/prev', 'subscribers/1/prev', ...]
+client.available_embedded_resources # => ['subscribers/0/prev', 'subscribers/1/prev', ...]
 ```
 
 These embedded resources can be followed by calling `client.go_to_embedded!`, passing
