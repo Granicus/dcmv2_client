@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe DCMv2::Client do
   let(:account_id) { 96778814 }
-  let(:connection) { DCMv2::Connection.new(account_id, '42') }
+  let(:connection) { DCMv2::Connection.new('42') }
 
   context "when connecting to the API" do
     let(:client) { DCMv2::Client.new(connection) }
 
     context "when unauthorized" do
       it "doesn't make a request when an api_key is not provided" do
-        connection = DCMv2::Connection.new(nil, nil)
+        connection = DCMv2::Connection.new(nil)
         connection.api_key.should be_nil
         client = DCMv2::Client.new(connection)
 
@@ -23,28 +23,16 @@ describe DCMv2::Client do
       end
     end
 
-    context "when the account_id is not recognized" do
-      before(:each) do
-        stub_request(:get, connection.url_for(nil)).to_return(api_v2_response)
-        stub_request(:get, connection.url_for("reports")).to_return(unauthorized_response)
-      end
-
-      it "raises an exception" do
-        client.go_to!('reports')
-        expect { client.available_resources }.to raise_error(DCMv2::Unauthorized)
-      end
-    end
-
     context "when authorized" do
       before(:each) do
         stub_request(:get, connection.url_for(nil)).to_return(api_v2_response)
-        stub_request(:get, connection.url_for("reports")).to_return(api_v2_reports_response)
-        stub_request(:get, connection.url_for("reports/performance")).to_return(api_v2_reports_performance_response)
-        stub_request(:get, connection.url_for("reports/performance/subscribers")).to_return(api_v2_reports_performance_subscribers_response)
-        stub_request(:get, connection.url_for("reports/performance/subscriptions")).to_return(api_v2_reports_performance_subscriptions_response)
-        stub_request(:get, connection.url_for("reports/performance/engagement")).to_return(api_v2_reports_performance_engagement_response)
-        stub_request(:get, connection.url_for("reports/performance/network")).to_return(api_v2_reports_performance_network_response)
-        stub_request(:get, connection.url_for("reports/performance/subscriptions/2014/4")).to_return(api_v2_reports_performance_subscriptions_2014_4_response)
+        stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports")).to_return(api_v2_reports_response)
+        stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance")).to_return(api_v2_reports_performance_response)
+        stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance/subscribers")).to_return(api_v2_reports_performance_subscribers_response)
+        stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance/subscriptions")).to_return(api_v2_reports_performance_subscriptions_response)
+        stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance/engagement")).to_return(api_v2_reports_performance_engagement_response)
+        stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance/network")).to_return(api_v2_reports_performance_network_response)
+        stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance/subscriptions/2014/4")).to_return(api_v2_reports_performance_subscriptions_2014_4_response)
       end
 
       context "when navigating" do
@@ -105,7 +93,7 @@ describe DCMv2::Client do
             client.go_to!('reports').go_to!('performance_overview')
             expect {
               client.up!
-            }.to change(client, :current_path).from(connection.path_for('reports/performance')).to(connection.path_for('reports'))
+            }.to change(client, :current_path).from(connection.path_for("/api/v2/accounts/#{account_id}/reports/performance")).to(connection.path_for("/api/v2/accounts/#{account_id}/reports"))
           end
 
           it "should skip over the accounts resource" do
@@ -158,12 +146,12 @@ describe DCMv2::Client do
         context "when jumping to resources" do
           it "jumps to a specified resource name" do
             expect {
-              client.jump_to!('reports/performance/subscriptions')
+              client.jump_to!("/api/v2/accounts/#{account_id}/reports/performance/subscriptions")
             }.to change(client, :current_path).from("/api/v2").to("/api/v2/accounts/#{account_id}/reports/performance/subscriptions")
           end
 
           it "raises an error when the url is not recognized" do
-            stub_request(:get, connection.url_for("reports/performance/jabberwocky")).to_return(missing_response)
+            stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance/jabberwocky")).to_return(missing_response)
 
             client.jump_to!('reports/performance/jabberwocky')
             expect { client.data }.to raise_error

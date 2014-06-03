@@ -5,8 +5,7 @@ describe DCMv2::Connection do
   let(:api_key)    { '42' }
 
   it "has an API key" do
-    connection = DCMv2::Connection.new(account_id, api_key)
-    connection.account_id.should == 96778814
+    connection = DCMv2::Connection.new(api_key)
     connection.api_key.should == '42'
   end
 
@@ -15,18 +14,13 @@ describe DCMv2::Connection do
     connection = DCMv2::Connection.new
 
     connection.api_key.should == '42'
-    connection.account_id.should be_nil
   end
 
   context "when building a url" do
-    let(:connection) { DCMv2::Connection.new(account_id, api_key) }
+    let(:connection) { DCMv2::Connection.new(api_key) }
 
-    it "returns only the base url without an account_id when nil is passed in" do
+    it "returns only the base url when nil is passed in" do
       connection.url_for(nil).should == DCMv2::Connection.base_uri + "/api/v2"
-    end
-
-    it "prepends the account_id to urls" do
-      connection.url_for('reports').should == DCMv2::Connection.base_uri + "/api/v2/accounts/#{account_id}/reports"
     end
 
     it "does not prepend the account id when the passed in url has a leading slash" do
@@ -34,11 +28,11 @@ describe DCMv2::Connection do
     end
 
     it "does not prepend the account id when the passed in url has a leading 'http'" do
-      connection.url_for('http://govdelivery.com/api/v2').should == "http://govdelivery.com/api/v2"
+      connection.url_for('https://stage-api.govdelivery.com/api/v2').should == "https://stage-api.govdelivery.com/api/v2"
     end
 
     it "does not prepend the account id when the passed in url has a leading 'https'" do
-      connection.url_for('https://govdelivery.com/api/v2').should == "https://govdelivery.com/api/v2"
+      connection.url_for('https://stage-api.govdelivery.com/api/v2').should == "https://stage-api.govdelivery.com/api/v2"
     end
   end
 end

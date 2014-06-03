@@ -1,11 +1,10 @@
 class DCMv2::Connection
   include HTTParty
   base_uri DCMv2.base_uri
-  attr_reader :api_key, :account_id
+  attr_reader :api_key
 
-  def initialize(account_id = DCMv2.account_id, key = DCMv2.api_key)
-    @account_id = account_id
-    @api_key    = key
+  def initialize(key = DCMv2.api_key)
+    @api_key = key
   end
 
   def self.base_path
@@ -35,11 +34,7 @@ class DCMv2::Connection
   def path_for(path)
     path_parts = []
     if path
-      if path =~ /^\//
-        path_parts << path
-      else
-        path_parts += [self.class.base_path, "accounts/#{account_id}", path]
-      end
+      path_parts << path
     else
       path_parts << self.class.base_path
     end

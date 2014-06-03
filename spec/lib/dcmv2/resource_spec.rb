@@ -2,7 +2,8 @@
 require 'spec_helper'
 
 describe DCMv2::Resource do
-  let(:connection) { DCMv2::Connection.new(96778814, '42') }
+  let(:account_id) { 96778814 }
+  let(:connection) { DCMv2::Connection.new('42') }
 
   it "tracks the links available to it" do
     stub_request(:get, connection.url_for(nil)).to_return(api_v2_response)
@@ -17,7 +18,7 @@ describe DCMv2::Resource do
 
     before(:each) do
       stub_request(:get, connection.url_for(nil)).to_return(api_v2_response)
-      stub_request(:get, connection.url_for('reports')).to_return(api_v2_reports_response)
+      stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports")).to_return(api_v2_reports_response)
     end
 
     it "follows links" do
@@ -37,12 +38,12 @@ describe DCMv2::Resource do
   end
 
   context "when at the performance overview report" do
-    let(:resource) { DCMv2::Resource.new(connection, 'reports/performance')}
+    let(:resource) { DCMv2::Resource.new(connection, "/api/v2/accounts/#{account_id}/reports/performance")}
 
     before(:each) do
-      stub_request(:get, connection.url_for('reports/performance')).to_return(api_v2_performance_report_response)
-      stub_request(:get, connection.url_for('reports/performance/subscriptions')).to_return(api_v2_performance_subscription_report_response)
-      stub_request(:get, connection.url_for('reports/performance/subscriptions/2014')).to_return(api_v2_performance_subscription_2014_5_report_response)
+      stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance")).to_return(api_v2_performance_report_response)
+      stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance/subscriptions")).to_return(api_v2_performance_subscription_report_response)
+      stub_request(:get, connection.url_for("/api/v2/accounts/#{account_id}/reports/performance/subscriptions/2014")).to_return(api_v2_performance_subscription_2014_5_report_response)
     end
 
     it "has embedded data" do
@@ -159,12 +160,12 @@ describe DCMv2::Resource do
     end
 
     it "cannot follow templated links without options" do
-      resource = DCMv2::Resource.new(connection, 'reports/performance/subscriptions')
+      resource = DCMv2::Resource.new(connection, "/api/v2/accounts/#{account_id}/reports/performance/subscriptions")
       expect { resource.follow('find') }.to raise_error
     end
 
     it "can follow templated links with required attributes" do
-      resource = DCMv2::Resource.new(connection, 'reports/performance/subscriptions')
+      resource = DCMv2::Resource.new(connection, "/api/v2/accounts/#{account_id}/reports/performance/subscriptions")
       subscription_resource = resource.follow('find', { year: 2014 })
       subscription_resource.data['year'].should == 2014
       subscription_resource.data['month'].should == 5
@@ -177,7 +178,7 @@ describe DCMv2::Resource do
     end
 
     it "converts embedded data in an Array into resources" do
-      resource = DCMv2::Resource.new(connection, 'reports/performance/subscriptions')
+      resource = DCMv2::Resource.new(connection, "/api/v2/accounts/#{account_id}/reports/performance/subscriptions")
       resource.embedded_resources.should_not be_empty
       resource.embedded_resources.size.should <= 12
       resource.embedded_resources['monthly_reports'][0].links.should =~ %w(self year prev find)
