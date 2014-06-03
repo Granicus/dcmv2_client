@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+Date: Tue, 27 May 2014 18:55:56 GMT
+Server: Apache/2.2.15 (CentOS)
+ETag: "c80bcac0d02797dc3e0e75430df77db9"
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+P3P: CP="CAO DSP COR ADM DEV TAIo PSAo IVAo IVDo OUR DELo SAMo OTRo BUS UNI PRE", policyref="/w3c/p3p.xml"
+X-UA-Compatible: IE=Edge,chrome=1
+X-Runtime: 0.414369
+X-Powered-By: Phusion Passenger 4.0.37
+Status: 200 OK
+X-Served-By: int-evoweb1-ep.tops.gdi
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: application/hal+json; charset=utf-8
+
+{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance"}},"_embedded":{"subscribers":{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance/subscribers/2014/5"},"prev":{"href":"/api/v2/accounts/96778814/reports/performance/subscribers/2014/4"},"year":{"href":"/api/v2/accounts/96778814/reports/performance/subscribers/2014"},"find":{"templated":true,"href":"/api/v2/accounts/96778814/reports/performance/subscribers/{year}/{month}"}},"year":2014,"month":5,"net":-2012,"total":2887263,"sources":{"other":0,"upload":4,"network":1,"direct":1,"deleted":2018}},"subscriptions":{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance/subscriptions/2014/5"},"prev":{"href":"/api/v2/accounts/96778814/reports/performance/subscriptions/2014/4"},"year":{"href":"/api/v2/accounts/96778814/reports/performance/subscriptions/2014"},"find":{"templated":true,"href":"/api/v2/accounts/96778814/reports/performance/subscriptions/{year}/{month}"}},"year":2014,"month":5,"net":-8005,"total":6531460,"sources":{"other":0,"upload":12027,"network":1,"direct":1,"deleted":20034}},"network":{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014/4"},"prev":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014/3"},"year":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014"},"find":{"templated":true,"href":"/api/v2/accounts/96778814/reports/performance/network/{year}/{month}"}},"year":2014,"month":4,"sources":[{"name":"& City of Pinole-QC","subscribers":1},{"name":"\"1\" AUDI(5) \u00ae","subscribers":1}]},"engagement":{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance/engagement/2014/4"},"prev":{"href":"/api/v2/accounts/96778814/reports/performance/engagement/2014/3"},"year":{"href":"/api/v2/accounts/96778814/reports/performance/engagement/2014"},"find":{"templated":true,"href":"/api/v2/accounts/96778814/reports/performance/engagement/{year}/{month}"}},"year":2014,"month":4,"unique_recipients":22,"engaged_recipients":20,"engagement_rate":"0.909090909090909090909090909090909090909"}}}

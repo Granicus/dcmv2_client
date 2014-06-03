@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Date: Tue, 27 May 2014 21:49:38 GMT
+Server: Apache/2.2.26 (Unix) DAV/2 Phusion_Passenger/4.0.42 mod_ssl/2.2.26 OpenSSL/0.9.8y
+ETag: "c7c70a3539c40e295b5c7811f4d9f11c"
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+P3P: CP="CAO DSP COR ADM DEV TAIo PSAo IVAo IVDo OUR DELo SAMo OTRo BUS UNI PRE", policyref="/w3c/p3p.xml"
+X-UA-Compatible: IE=Edge
+X-Runtime: 1.823690
+X-Powered-By: Phusion Passenger 4.0.42
+Status: 200 OK
+Transfer-Encoding: chunked
+Content-Type: application/hal+json; charset=utf-8
+
+{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance/subscriptions/2014/5"},"prev":{"href":"/api/v2/accounts/96778814/reports/performance/subscriptions/2014/4"},"year":{"href":"/api/v2/accounts/96778814/reports/performance/subscriptions/2014"},"find":{"templated":true,"href":"/api/v2/accounts/96778814/reports/performance/subscriptions/{year}/{month}"}},"year":2014,"month":5,"net":3147,"total":0,"sources":{"other":5,"upload":1020,"network":1084,"direct":1038,"deleted":0}}

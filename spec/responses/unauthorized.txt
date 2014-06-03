@@ -1,0 +1,14 @@
+HTTP/1.1 401 Unauthorized
+Date: Tue, 27 May 2014 15:40:53 GMT
+Server: Apache/2.2.26 (Unix) DAV/2 Phusion_Passenger/4.0.42 mod_ssl/2.2.26 OpenSSL/0.9.8y
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+P3P: CP="CAO DSP COR ADM DEV TAIo PSAo IVAo IVDo OUR DELo SAMo OTRo BUS UNI PRE", policyref="/w3c/p3p.xml"
+X-UA-Compatible: IE=Edge
+X-Runtime: 0.640577
+X-Powered-By: Phusion Passenger 4.0.42
+Status: 401 Unauthorized
+Transfer-Encoding: chunked
+Content-Type: application/hal+json; charset=utf-8
+
+{"message":"Unauthorized"}

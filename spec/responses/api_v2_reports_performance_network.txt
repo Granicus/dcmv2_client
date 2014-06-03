@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+Date: Tue, 27 May 2014 18:50:42 GMT
+Server: Apache/2.2.15 (CentOS)
+ETag: "875d221eafc5e617cde5fd7055e1461c"
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+P3P: CP="CAO DSP COR ADM DEV TAIo PSAo IVAo IVDo OUR DELo SAMo OTRo BUS UNI PRE", policyref="/w3c/p3p.xml"
+X-UA-Compatible: IE=Edge,chrome=1
+X-Runtime: 0.161964
+X-Powered-By: Phusion Passenger 4.0.37
+Status: 200 OK
+X-Served-By: int-evoweb2-ep.tops.gdi
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: application/hal+json; charset=utf-8
+
+{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance/network"},"latest_year":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014"},"find":{"templated":true,"href":"/api/v2/accounts/96778814/reports/performance/network/{year}"}},"_embedded":{"monthly_reports":[{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014/4"},"prev":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014/3"},"year":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014"},"find":{"templated":true,"href":"/api/v2/accounts/96778814/reports/performance/network/{year}/{month}"}},"year":2014,"month":4,"sources":[{"name":"\"1\" AUDI(5) \u00ae","subscribers":1},{"name":"& City of Pinole-QC","subscribers":1}]},{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014/3"},"prev":{"href":"/api/v2/accounts/96778814/reports/performance/network/2013/7"},"next":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014/4"},"year":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014"},"find":{"templated":true,"href":"/api/v2/accounts/96778814/reports/performance/network/{year}/{month}"}},"year":2014,"month":3,"sources":[{"name":"\"Almeada County-QC test","subscribers":2}]},{"_links":{"self":{"href":"/api/v2/accounts/96778814/reports/performance/network/2013/7"},"next":{"href":"/api/v2/accounts/96778814/reports/performance/network/2014/3"},"year":{"href":"/api/v2/accounts/96778814/reports/performance/network/2013"},"find":{"templated":true,"href":"/api/v2/accounts/96778814/reports/performance/network/{year}/{month}"}},"year":2013,"month":7,"sources":[{"name":"ScottR","subscribers":3},{"name":"Account on default theme","subscribers":1}]}]},"start_year":2013,"start_month":5,"end_year":2014,"end_month":4,"sources":[{"name":"\"1\" AUDI(5) \u00ae","subscribers":1},{"name":"& City of Pinole-QC","subscribers":1},{"name":"\"Almeada County-QC test","subscribers":2},{"name":"ScottR","subscribers":3},{"name":"Account on default theme","subscribers":1}]}
