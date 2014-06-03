@@ -16,15 +16,13 @@ $ gem install dcmv2_client
 
 Configuring standalone
 ------------------
-This client requires a private key for an account. Once these pieces of data
-have been obtained, they can be added as the environment variables
-DCMV2_API_KEY and DCMV2_ACCOUNT_ID respectively. For convenience
-these values can also be assigned in a .env file. See .env.example for how to
-set the values.
+This client requires a private key for an account. Once the key has
+been obtained, it can be added as the environment variable DCMV2_API_KEY.
+For convenience this value can also be assigned in a .env file.
+See .env.example for how to set the value.
 
 ```ruby
 DCMV2_API_KEY = 'my-sekret-api-key'
-DCMV2_ACCOUNT_ID = 1234
 ```
 
 Running standalone
@@ -38,14 +36,13 @@ $ rake console
 
 Configuring within a project
 ----------------------------
-Within a project, e.g. in a Rails app, the environment variables can be
-bypassed and the API key and Account ID can be assigned directly to the DCMv2
-module. It is recommended these values be added in a initializers file.
+Within a project, e.g. in a Rails app, the environment variable can be
+bypassed and the API key can be assigned directly to the DCMv2 module.
+It is recommended to add this value in an initializers file.
 
 *config/initializers/dcmv2.rb*
 ```ruby
 DCMv2.api_key = 'my-sekret-api-key'
-DCMv2.account_id = 1234
 ```
 
 Navigation
@@ -85,13 +82,13 @@ To go up a step in the API tree, call `client.up!`
 e.g. This will take a user from
 
 ```
-/api/v2/accounts/{DCMV2_ACCOUNT_ID}/reports/performance
+/api/v2/accounts/1234/reports/performance
 ```
 
 to
 
 ```
-/api/v2/accounts/{DCMV2_ACCOUNT_ID}/reports
+/api/v2/accounts/1234/reports
 ```
 
 Jump to a known resource
@@ -100,14 +97,7 @@ When the path for a desired resource is known, it's possible to jump directly
 to the resource by calling
 
 ```ruby
-client.jump_to!('/api/v2/accounts/{DCMV2_ACCOUNT_ID}/reports')
-```
-
-Or, since the DCMV2_ACCOUNT_ID is already known to the client, the portion of the
-path proceding the account id can be used.
-
-```ruby
-client.jump_to!('reports/performance') # => resolves to /api/v2/accounts/{DCMV2_ACCOUNT_ID}/reports/performance
+client.jump_to!('/api/v2/accounts/1234/reports')
 ```
 
 Reading data
@@ -157,7 +147,7 @@ that gathers all of the previous subscription sources.
 
 ```ruby
 client = DCMv2::Client.new
-client.jump_to!('reports/performance/subscriptions')
+client.jump_to!('/api/v2/accounts/1234/reports/performance/subscriptions')
 # Get the latest year's worth of data
 client.go_to!('latest_year')
 sources = {}
