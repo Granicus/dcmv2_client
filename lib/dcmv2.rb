@@ -10,7 +10,7 @@ module DCMv2
     # ```ruby
     # DCMv2.configure do |config|
     #   config.api_key    = 'my_key'
-    #   config.base_uri   = 'http://govdelivery.com
+    #   config.base_uri   = 'https://stage-api.govdelivery.com
     # end
     # ```
     def configure
@@ -19,7 +19,7 @@ module DCMv2
     end
 
     def base_uri
-      @base_uri ||= 'http://govdelivery.com/'
+      @base_uri ||= 'https://stage-api.govdelivery.com/'
     end
 
     def base_uri=(uri)
