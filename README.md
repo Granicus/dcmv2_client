@@ -147,7 +147,10 @@ that gathers all of the previous subscription sources.
 
 ```ruby
 client = DCMv2::Client.new
-client.jump_to!('/api/v2/accounts/1234/reports/performance/subscriptions')
+# Go to the reports resource
+client.go_to!('reports')
+# Go to the subscription report resource
+client.go_to!('subscription_performance_reports')
 # Get the latest year's worth of data
 client.go_to!('latest_year')
 sources = {}
