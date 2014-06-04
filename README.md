@@ -27,7 +27,7 @@ DCMV2_API_KEY = 'my-sekret-api-key'
 
 Running standalone
 ------------------
-Once the API key and account ID have been setup, an IRB console with the gem
+Once the API key has been setup, an IRB console with the gem
 loaded can be accessed by running from the root directory of the gem:
 
 ```
