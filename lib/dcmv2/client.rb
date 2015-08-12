@@ -84,14 +84,14 @@ class DCMv2::Client
     jump_to(parent_path)
   end
 
-  def jump_to!(resource_path)
-    update_resource(get_resource_by_path(connection.path_for(resource_path)))
+  def jump_to!(resource_path, params = {})
+    update_resource(get_resource_by_path(connection.path_for(resource_path, params)))
     return self
   end
 
-  def jump_to(resource_path)
+  def jump_to(resource_path, params = {})
     self.class.new(connection, cache).tap do |new_client|
-      new_client.current_resource = get_resource_by_path(connection.path_for(resource_path))
+      new_client.current_resource = get_resource_by_path(connection.path_for(resource_path, params))
     end
   end
 

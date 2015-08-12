@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dcmv2_client (0.0.1)
+    dcmv2_client (0.0.2)
       facets
       httparty
 
@@ -33,7 +33,7 @@ GEM
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    json (1.8.1)
+    json (1.8.3)
     listen (2.7.5)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -73,3 +73,6 @@ DEPENDENCIES
   guard-rspec (~> 2.6)
   rspec-mocks
   webmock
+
+BUNDLED WITH
+   1.10.6

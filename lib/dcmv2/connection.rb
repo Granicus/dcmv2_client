@@ -26,20 +26,21 @@ class DCMv2::Connection
     end
   end
 
-  def url_for(path)
+  def url_for(path, params = {})
     return path if path.to_s =~ /^http(s?):\/\//
-    File.join(self.class.base_uri, self.path_for(path))
+    File.join(self.class.base_uri, self.path_for(path, params))
   end
 
-  def path_for(path)
+  def path_for(path, params = {})
     path_parts = []
     if path
       path_parts << path
     else
       path_parts << self.class.base_path
     end
-
-    return File.join(*path_parts)
+    path = File.join(*path_parts)
+    path = "#{path}?#{URI.encode_www_form(params.to_a)}" if params.any?
+    return path
   end
 end
 
