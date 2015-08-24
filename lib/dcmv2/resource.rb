@@ -1,18 +1,20 @@
 class DCMv2::Resource
-  attr_reader :path
+  attr_reader :path, :params, :type
 
-  def initialize(connection, path = '/api/v2')
+  def initialize(connection, path = '/api/v2', params = {}, type = :get)
     @connection = connection
     @path       = path
+    @params     = params
+    @type       = type
   end
 
   def links
     available_resources.keys
   end
 
-  def follow(resource_name, templated_options = {})
+  def follow(resource_name, templated_options = {}, params = {}, type = :get)
     return self if resource_name == 'self'
-    self.class.new(connection, href_for(resource_name, templated_options))
+    self.class.new(connection, href_for(resource_name, templated_options), params, type)
   end
 
   def href_for(resource_name, templated_options = {})
@@ -96,7 +98,7 @@ class DCMv2::Resource
   end
 
   def raw_response
-    @raw_data ||= connection.make_request(self.path)
+    @raw_data ||= connection.make_request(self.path, self.params, self.type)
   end
 
   def connection

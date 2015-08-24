@@ -34,10 +34,6 @@ describe DCMv2::Connection do
     it "does not prepend the account id when the passed in url has a leading 'https'" do
       connection.url_for('https://stage-api.govdelivery.com/api/v2').should == "https://stage-api.govdelivery.com/api/v2"
     end
-
-    it "appends query parameters when specified" do
-      connection.url_for('/api/v2', {q: "test"}).should == DCMv2::Connection.base_uri + "/api/v2?q=test"
-    end
   end
 end
 

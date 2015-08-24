@@ -11,8 +11,8 @@ class DCMv2::Connection
     '/api/v2'
   end
 
-  def make_request(path = nil)
-    response = self.class.get(url_for(path), headers: { "X-AUTH-TOKEN" => self.api_key, "Accept" => "application/hal+json" })
+  def make_request(path = nil, params = {}, type = :get)
+    response = self.class.send(type, url_for(path), query: params, headers: { "X-AUTH-TOKEN" => self.api_key, "Accept" => "application/hal+json" })
 
     case response.response
     when Net::HTTPOK
@@ -26,21 +26,19 @@ class DCMv2::Connection
     end
   end
 
-  def url_for(path, params = {})
+  def url_for(path)
     return path if path.to_s =~ /^http(s?):\/\//
-    File.join(self.class.base_uri, self.path_for(path, params))
+    File.join(self.class.base_uri, self.path_for(path))
   end
 
-  def path_for(path, params = {})
+  def path_for(path)
     path_parts = []
     if path
       path_parts << path
     else
       path_parts << self.class.base_path
     end
-    path = File.join(*path_parts)
-    path = "#{path}?#{URI.encode_www_form(params.to_a)}" if params.any?
-    return path
+    return File.join(*path_parts)
   end
 end
 

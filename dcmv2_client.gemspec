@@ -13,6 +13,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'httparty'
   gem.add_dependency 'facets'
   gem.add_development_dependency 'webmock'
+  gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rspec-mocks'
   gem.add_development_dependency 'guard-rspec', '~> 2.6'
   gem.add_development_dependency 'dotenv'

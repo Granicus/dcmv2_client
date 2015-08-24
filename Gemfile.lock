@@ -71,8 +71,6 @@ DEPENDENCIES
   dcmv2_client!
   dotenv
   guard-rspec (~> 2.6)
+  pry
   rspec-mocks
   webmock
-
-BUNDLED WITH
-   1.10.6

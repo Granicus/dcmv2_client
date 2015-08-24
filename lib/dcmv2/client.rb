@@ -38,14 +38,14 @@ class DCMv2::Client
     self.current_resource.embedded_data
   end
 
-  def go_to!(resource_name, link_options = {})
-    update_resource(get_resource(resource_name, link_options))
+  def go_to!(resource_name, link_options = {}, params = {}, type = :get)
+    update_resource(get_resource(resource_name, link_options, self.current_resource, params, type))
     return self
   end
 
-  def go_to(resource_name, link_options = {})
+  def go_to(resource_name, link_options = {}, params = {}, type = :get)
     self.class.new(connection, cache).tap do |new_client|
-      new_client.current_resource = get_resource(resource_name, link_options)
+      new_client.current_resource = get_resource(resource_name, link_options, self.current_resource, params, type)
     end
   end
 
@@ -84,14 +84,14 @@ class DCMv2::Client
     jump_to(parent_path)
   end
 
-  def jump_to!(resource_path, params = {})
-    update_resource(get_resource_by_path(connection.path_for(resource_path, params)))
+  def jump_to!(resource_path, params = {}, type = :get)
+    update_resource(get_resource_by_path(connection.path_for(resource_path), params, type))
     return self
   end
 
-  def jump_to(resource_path, params = {})
+  def jump_to(resource_path, params = {}, type = :get)
     self.class.new(connection, cache).tap do |new_client|
-      new_client.current_resource = get_resource_by_path(connection.path_for(resource_path, params))
+      new_client.current_resource = get_resource_by_path(connection.path_for(resource_path), params, type)
     end
   end
 
@@ -134,13 +134,13 @@ class DCMv2::Client
     OpenStruct.new(path: resource_name, resource_name: parts.pop, parts: parts)
   end
 
-  def get_resource_by_path(path)
-    self.cache[path] ||= DCMv2::Resource.new(connection, path)
+  def get_resource_by_path(path, params = {}, type = :get)
+    self.cache[path] ||= DCMv2::Resource.new(connection, path, params, type)
   end
 
-  def get_resource(resource_name, link_options, source_resource = self.current_resource)
+  def get_resource(resource_name, link_options, source_resource = self.current_resource, params = {}, type = :get)
     begin
-      self.cache[source_resource.href_for(resource_name, link_options)] ||= source_resource.follow(resource_name, link_options)
+      self.cache[source_resource.href_for(resource_name, link_options)] ||= source_resource.follow(resource_name, link_options, params, type)
     rescue KeyError
       invalid_resource!(resource_name)
     end
@@ -157,7 +157,7 @@ class DCMv2::Client
   end
 
   def update_resource(resource)
-    history << self.current_resource
+    history << self.current_resource if self.current_resource.type == :get
     self.current_resource = resource
   end
 
