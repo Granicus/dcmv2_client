@@ -135,7 +135,11 @@ class DCMv2::Client
   end
 
   def get_resource_by_path(path, params = {}, type = :get)
-    self.cache[path] ||= DCMv2::Resource.new(connection, path, params, type)
+    if type == :get
+      self.cache[path] ||= DCMv2::Resource.new(connection, path, params, type)
+    else
+      DCMv2::Resource.new(connection, path, params, type)
+    end
   end
 
   def get_resource(resource_name, link_options, source_resource = self.current_resource, params = {}, type = :get)

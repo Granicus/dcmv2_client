@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dcmv2_client (0.0.2)
+    dcmv2_client (0.0.4)
       facets
       httparty
 

@@ -12,7 +12,9 @@ class DCMv2::Connection
   end
 
   def make_request(path = nil, params = {}, type = :get)
-    response = self.class.send(type, url_for(path), query: params, headers: { "X-AUTH-TOKEN" => self.api_key, "Accept" => "application/hal+json" })
+    payload = type == :get ? {query: params} : {body: params.to_json}
+    payload[:headers] = { "X-AUTH-TOKEN" => self.api_key, "Accept" => "application/hal+json", "Content-Type" => "application/json" }
+    response = self.class.send(type, url_for(path), payload)
 
     case response.response
     when Net::HTTPOK
