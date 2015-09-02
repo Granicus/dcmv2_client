@@ -17,7 +17,7 @@ class DCMv2::Connection
     response = self.class.send(type, url_for(path), payload)
 
     case response.response
-    when Net::HTTPOK
+    when Net::HTTPOK, Net::HTTPCreated, Net::HTTPAccepted
       response.parsed_response
     when Net::HTTPUnauthorized
       raise DCMv2::Unauthorized, "Unauthorized response. Please double check your API key."

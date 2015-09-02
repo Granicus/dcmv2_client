@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dcmv2_client (0.0.4)
+    dcmv2_client (0.0.5)
       facets
       httparty
 
@@ -18,7 +18,7 @@ GEM
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
-    facets (2.9.3)
+    facets (3.0.0)
     ffi (1.9.3)
     formatador (0.2.5)
     guard (2.6.1)
@@ -30,7 +30,7 @@ GEM
     guard-rspec (2.6.0)
       guard (>= 1.8)
       rspec (~> 2.13)
-    httparty (0.13.1)
+    httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     json (1.8.3)
@@ -74,3 +74,6 @@ DEPENDENCIES
   pry
   rspec-mocks
   webmock
+
+BUNDLED WITH
+   1.10.6
