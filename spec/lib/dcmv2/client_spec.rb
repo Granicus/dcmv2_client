@@ -196,6 +196,24 @@ describe DCMv2::Client do
           end
         end
       end
+
+      context "signup" do
+        before(:each) do
+          stub_request(:post, connection.url_for("/api/v2/accounts/#{account_id}/signup")).to_return(suppressed_response)
+        end
+
+        it "throws a DCMv2::Suppressed error when attempting to signup a suppressed address" do
+          payload = {
+            email: "dont.email@sink.govdelivery.com",
+            subscribe: {topic_ids: [98463792]},
+            reason: "integration_hub",
+            source: "salesforce"
+          }
+          expect{
+            client.jump_to!("/api/v2/accounts/#{account_id}/signup", payload, :post).data
+          }.to raise_error(DCMv2::Suppressed)
+        end
+      end
     end
   end
 
@@ -205,6 +223,10 @@ describe DCMv2::Client do
 
   def missing_response
     example_file_for('missing.txt')
+  end
+
+  def suppressed_response
+    example_file_for('suppressed.txt')
   end
 
   def api_v2_response

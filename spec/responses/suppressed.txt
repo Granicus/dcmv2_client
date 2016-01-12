@@ -1,0 +1,19 @@
+HTTP/1.1 409 Conflict
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST, PUT, DELETE, GET, OPTIONS
+Access-Control-Request-Method: *
+Access-Control-Expose-Headers: X-Auth-Token
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Auth-Token
+Content-Type: application/hal+json; charset=utf-8
+Pragma: no-cache
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+P3p: CP="CAO DSP COR ADM DEV TAIo PSAo IVAo IVDo OUR DELo SAMo OTRo BUS UNI PRE", policyref="/w3c/p3p.xml"
+X-Ua-Compatible: IE=Edge
+X-Request-Id: 578be5e4c805bfd373c20830ee2e6125
+X-Runtime: 0.091100
+Server: WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
+Date: Tue, 12 Jan 2016 20:15:09 GMT
+Content-Length: 76
+Connection: Keep-Alive
+
+{"message":"Email dont.email@sink.govdelivery.com is on a suppression list"}
