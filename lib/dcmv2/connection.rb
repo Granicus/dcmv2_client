@@ -18,16 +18,17 @@ class DCMv2::Connection
 
     case response.response
     when Net::HTTPOK, Net::HTTPCreated, Net::HTTPAccepted
-      response.parsed_response
+      return response.parsed_response
     when Net::HTTPUnauthorized
       raise DCMv2::Unauthorized, "Unauthorized response. Please double check your API key."
     when Net::HTTPNotFound
       raise DCMv2::NotFound, "Could not find the requested resource."
     when Net::HTTPConflict
       raise DCMv2::Suppressed, "Email Address or Phone Number has been suppressed. Can not subscribe or message."
-    else
-      raise StandardError, "An error occurred when connecting to the server. #{response.response.class if response.response}"
+    when Net::HTTPClientError
+      raise DCMv2::InvalidRequest, response.parsed_response if response.code == 422
     end
+    raise DCMv2::ClientError, "An error occurred when connecting to the server. #{response.response.class if response.response}"
   end
 
   def url_for(path)
@@ -50,4 +51,6 @@ class DCMv2::InvalidResource < StandardError; end
 class DCMv2::NotFound < StandardError; end
 class DCMv2::Suppressed < StandardError; end
 class DCMv2::Unauthorized < StandardError; end
+class DCMv2::InvalidRequest < StandardError; end
+class DCMv2::ClientError < StandardError; end
 
