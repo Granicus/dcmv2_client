@@ -22,25 +22,28 @@ describe DCMv2::Connection do
     it "returns a parsed response for HTTPOK", active:true do
       response = double("response")
       allow(response).to receive(:response).and_return(Net::HTTPOK.new(0,200,""))
+      allow(response).to receive(:code).and_return(200)
       allow(response).to receive(:parsed_response).and_return("OKAY RESPONSE")
       expect(DCMv2::Connection).to receive(:get).and_return(response)
-      connection.make_request().should == "OKAY RESPONSE"
+      connection.make_request().should == {status: 200, body: "OKAY RESPONSE"}
     end
 
     it "returns a parsed response for HTTPCreated", active:true do
       response = double("response")
       allow(response).to receive(:response).and_return(Net::HTTPCreated.new(0,201,""))
+      allow(response).to receive(:code).and_return(201)
       allow(response).to receive(:parsed_response).and_return("OKAY RESPONSE")
       expect(DCMv2::Connection).to receive(:get).and_return(response)
-      connection.make_request().should == "OKAY RESPONSE"
+      connection.make_request().should == {status: 201, body: "OKAY RESPONSE"}
     end
 
     it "returns a parsed response for HTTPAccepted", active:true do
       response = double("response")
       allow(response).to receive(:response).and_return(Net::HTTPAccepted.new(0,202,""))
+      allow(response).to receive(:code).and_return(202)
       allow(response).to receive(:parsed_response).and_return("OKAY RESPONSE")
       expect(DCMv2::Connection).to receive(:get).and_return(response)
-      connection.make_request().should == "OKAY RESPONSE"
+      connection.make_request().should == {status: 202, body: "OKAY RESPONSE"}
     end
 
     it "raises DCMv2 Unauthorized for HTTPUnauthorized", active:true do

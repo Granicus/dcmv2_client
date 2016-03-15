@@ -34,6 +34,10 @@ class DCMv2::Client
     self.current_resource.data
   end
 
+  def status
+    self.current_resource.status
+  end
+
   def embedded_data
     self.current_resource.embedded_data
   end

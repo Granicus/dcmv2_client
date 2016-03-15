@@ -38,6 +38,10 @@ class DCMv2::Resource
     resource_data.except('_links', '_embedded')
   end
 
+  def status
+    raw_response[:status]
+  end
+
   def embedded_resources
     return @embedded_resources if @embedded_resources || embedded_data.nil? || embedded_data.empty?
 
@@ -94,7 +98,7 @@ class DCMv2::Resource
   end
 
   def resource_data
-    @resource_data ||= JSON.parse(raw_response)
+    @resource_data ||= JSON.parse(raw_response[:body])
   end
 
   def raw_response
