@@ -11,6 +11,7 @@ describe DCMv2::Resource do
     resource = DCMv2::Resource.new(connection, nil)
 
     resource.links.should =~ %w(self reports)
+    resource.status.should == 200
   end
 
   context "when at the root" do
@@ -24,6 +25,7 @@ describe DCMv2::Resource do
     it "follows links" do
       report_resource = resource.follow('reports')
       report_resource.links.should =~ %w(self engagement_performance_reports network_performance_reports performance_overview subscriber_performance_reports subscription_performance_reports)
+      report_resource.status.should == 200
     end
 
     it "won't follow links not available to it" do
@@ -167,6 +169,7 @@ describe DCMv2::Resource do
     it "can follow templated links with required attributes" do
       resource = DCMv2::Resource.new(connection, "/api/v2/accounts/#{account_id}/reports/performance/subscriptions")
       subscription_resource = resource.follow('find', { year: 2014 })
+      subscription_resource.status.should == 200
       subscription_resource.data['year'].should == 2014
       subscription_resource.data['month'].should == 5
     end

@@ -18,7 +18,7 @@ class DCMv2::Connection
 
     case response.response
     when Net::HTTPOK, Net::HTTPCreated, Net::HTTPAccepted
-      return response.parsed_response
+      return {status: response.code, body: response.parsed_response}
     when Net::HTTPUnauthorized
       raise DCMv2::Unauthorized, "Unauthorized response. Please double check your API key."
     when Net::HTTPNotFound
