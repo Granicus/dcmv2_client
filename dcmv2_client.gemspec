@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email = ['support@govdelivery.com']
   gem.homepage = "http://govdelivery.com"
 
-  gem.add_dependency 'httparty'
+  gem.add_dependency 'httparty', '~>0.14.0'
   gem.add_dependency 'facets'
   gem.add_development_dependency 'webmock'
   gem.add_development_dependency 'pry'
